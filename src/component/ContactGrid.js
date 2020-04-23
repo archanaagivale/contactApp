@@ -33,6 +33,7 @@ export default class ContactGrid extends Component {
         super(props)
         this.state = {
             open: false,
+            contact:{},
             columns: [
                 { title: 'First Name', field: 'firstname' },
                 { title: 'Last Name', field: 'lastname' },
@@ -55,28 +56,45 @@ export default class ContactGrid extends Component {
     handleClose = () => {
         this.setState({ open: false });
     };
-    saveContact = (newData, event) => {
-        this.setState((prevState) => {
-            const data = [...prevState.data];
-            data.push(newData);
-            return { ...prevState, data };
-        })
-        this.handleClose();
-        /*  const data=this.state.data;
+    saveContact = (newData, action,event) => {
+          const data=[...this.state.data];
           debugger;
-          data.push(newData);
-          this.setState({data:data})*/
+          if(action=="edit"){
+            let oldData=_.filter(this.state.data,{id:newData.id});
+            data[data.indexOf(oldData[0])] = newData;
+          }
+          else
+          {
+              data.push(newData);
+          }
+          this.setState({data});
+          this.handleClose();
     }
     deleteContact=(event) =>{
         let id=event.target.parentElement.id;
-        this.setState((prevState) => {
+        const data=[...this.state.data];
+        _.remove(data, function(item) {
+            return item.id == id;
+          });
+          this.setState({data:data});
+       /* this.setState((prevState) => {
             const data = [...prevState.data];
             _.remove(data, function(item) {
                 return item.id == id;
               });
         return { ...prevState, data };
-    })
+    })*/
        
+    }
+    editContact=(event) =>{
+        let id=event.target.parentElement.id;
+        let obj=_.filter(this.state.data,{id:id});
+        this.setState({ contact: obj[0] });
+        this.handleOpen();
+    }
+    addContact=(event) =>{
+        this.setState({ contact: {}});
+        this.handleOpen();
     }
     render() {
         return (
@@ -87,19 +105,19 @@ export default class ContactGrid extends Component {
         aria-labelledby="simple-modal-title"
         aria-describedby="simple-modal-description"
       >
-       <Contact style={this.modelPopup} saveContact={this.saveContact}/>
+       <Contact style={this.modelPopup} contact={this.state.contact} saveContact={this.saveContact}/>
       </Modal>
             <Grid container style={{ width: "90%", marginLeft: "5%" }} >
             <Grid container style={{ width: "90%", marginLeft: "5%" }} >
             <Typography variant="h6" component="h2">
                     Contact List
                     </Typography>
-<Button color="primary" onClick={this.handleOpen}><span class="material-icons">
+<Button color="primary" onClick={this.addContact}><span class="material-icons">
 add
 </span> Contact</Button>
             </Grid>
                 {this.state.data.map((item, index) => (
-                    <Box   style={{ borderRadius: "4px",padding:"10px",width:"260px", marginRight: "10px", boxShadow: "rgba(0, 0, 0, 0.1) 2px 4px 18px 0px" }} key={index} width={210} marginRight={0.5} my={5} >
+                    <Box   style={{ borderRadius: "4px",padding:"10px",width:"260px", minHeigth:"150px", maxHeigth:"150px",marginTop: "15px", marginBottom: "0px", marginRight: "15px", boxShadow: "rgba(0, 0, 0, 0.1) 2px 4px 18px 0px" }} key={index} width={210} marginRight={0.5} my={5} >
                         <Box  >
                             <div style={{ margin: "5px", justifyContent: "center", display: "flex" }}><Avatar>H</Avatar></div>
                             <Typography gutterBottom variant="body2" style={{textAlign:"center"}}>
@@ -112,10 +130,10 @@ add
                                {item.phone}
                             </Typography>
                             <Typography id={item.id} variant="body2" color="textSecondary" style={{textAlign:"center"}}>
-                            <span class="material-icons">
+                            <span class="material-icons" style={{cursor:"pointer"}} onClick={this.editContact}>
                             edit
                             </span>
-                            <span class="material-icons" onClick={this.deleteContact}>
+                            <span class="material-icons"  style={{cursor:"pointer"}} onClick={this.deleteContact}>
                             delete
                             </span>
                             </Typography>

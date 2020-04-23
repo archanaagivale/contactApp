@@ -47,16 +47,11 @@ class ContactTable extends Component {
       this.setState({open:false});
     };
     saveContact =(newData,event)=>{
-      this.setState((prevState) => {
-        const data = [...prevState.data];
-        data.push(newData);
-        return { ...prevState, data };
-      })
-      this.handleClose();
-    /*  const data=this.state.data;
+      const data=[...this.state.data];
       debugger;
       data.push(newData);
-      this.setState({data:data})*/
+      this.setState({data:data});
+      this.handleClose();
     }
     render(){
     return (

@@ -1,18 +1,29 @@
 import React ,{Component} from "react";
+import _ from 'lodash';
 import Grid from '@material-ui/core/Grid';
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
 import Switch from '@material-ui/core/Switch';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 export default class Contact extends Component{
+     ObjectId = (
+        m = Math,
+        d = Date,
+        h = 16,
+        s = s => m.floor(s).toString(h)
+      ) =>
+        s(d.now() / 1000) +
+        " ".repeat(h).replace(/./g, () => s(m.random() * h));
     constructor(props){
         super(props)
         this.state={
-            firstname:"",
-            lastname:"",
-            email:"",
-            phone:"",
-            status:false
+            action : _.isEmpty(this.props.contact) ? "add" :"edit",
+            id:this.props.contact.id || this.ObjectId(),
+            firstname:this.props.contact.firstname || "",
+            lastname:this.props.contact.lastname ||"",
+            email:this.props.contact.email ||"",
+            phone:this.props.contact.phone ||"",
+            status:this.props.contact.status || false
         }
     }
     handleChange= (event)=>{
@@ -52,7 +63,7 @@ export default class Contact extends Component{
       />
        </Grid>
         <Grid item xs={12}>
-        <Button variant="contained" onClick={this.props.saveContact.bind(this, this.state)} color="primary">
+        <Button variant="contained" onClick={this.props.saveContact.bind(this, this.state,this.state.action)} color="primary">
         Save
         </Button> </Grid>
     </Grid>
