@@ -40,8 +40,12 @@ export default class ContactGrid extends Component {
 
             ],
             data: [
-                { id: '1', firstname: 'Archana', lastname: 'Harad',status:"active", email: "archanaagivale30@gmail.com", phone: "999999999" },
-                { id: '2', firstname: 'Aarvi', lastname: 'Agivale',status:"inactive", email: "archana@gmail.com", phone: "999999999" }
+                { id: '1', firstname: 'Mario', lastname: 'Speedwagon',status:"active", email: "mario@gmail.com", phone: "999999999" },
+                { id: '2', firstname: 'Petey', lastname: 'Cruiser',status:"active", email: "petey@gmail.com", phone: "8888888888" },
+                { id: '1', firstname: 'Anna', lastname: 'Sthesia',status:"active", email: "anna@gmail.com", phone: "777744444" },
+                { id: '2', firstname: 'Paul', lastname: 'Cruiser',status:"inactive", email: "paul@gmail.com", phone: "1111111111" },
+                { id: '1', firstname: 'Nick', lastname: 'Forcewind',status:"active", email: "nick@gmail.com", phone: "9988888888" },
+                { id: '2', firstname: 'Ira', lastname: 'Membrit',status:"inactive", email: "ira@gmail.com", phone: "6666666666" },
             ]
         }
     }
