@@ -34,7 +34,7 @@ export default class Contact extends Component{
       };
     render(){
     return (<>
-    <form  style={this.props.style} noValidate autoComplete="off">
+    <form  className="modelPopup" noValidate autoComplete="off">
      <div >
       <Grid container spacing={3}>
         <Grid item xs={12}>
@@ -62,7 +62,7 @@ export default class Contact extends Component{
         label="Status"
       />
        </Grid>
-        <Grid item xs={12} style={{textAlign:"center"}} >
+        <Grid item xs={12}  >
         <Button variant="contained" onClick={this.props.saveContact.bind(this, this.state,this.state.action)} color="primary">
         Save
         </Button> </Grid>

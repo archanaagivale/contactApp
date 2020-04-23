@@ -1,0 +1,86 @@
+.modelPopup {
+    position: absolute;
+    padding: 10px;
+    width: 500px;
+    max-width: 500px;
+    background-color: #fff;
+    border: 2px solid #fff;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.contactBox {
+    position: relative;
+    border-radius: 4px;
+    padding: 10px;
+    width: 260px !important;
+    min-height: 150px !important;
+    max-height: 150px !important;
+    margin-top: 15px !important;
+    margin-bottom: 0px !important;
+    margin-right: 15px !important;
+    box-shadow: rgba(0, 0, 0, 0.1) 2px 4px 18px 0px;
+}
+
+.c-avtar {
+    margin: 5px;
+    justify-content: center;
+    display: flex
+}
+
+.box-switch {
+    text-align: center;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+}
+
+.listview-btn{
+    position: absolute  !important;
+    left: 200px;
+    z-index: 9;
+    top: 20px  !important;
+}
+.contact-info
+{
+    text-align: center;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.gridview-btn
+    {
+        margin-left: 40px;
+    }
+@media (max-width: 640px) {
+	.contactBox {
+        position: relative;
+        border-radius: 4px;
+        padding: 10px;
+        width: 100% !important;
+        min-height: 150px !important;
+        max-height: 150px !important;
+        margin-top: 15px !important;
+        margin-bottom: 0px !important;
+        margin-right: 0px !important;
+        box-shadow: rgba(0, 0, 0, 0.1) 2px 4px 18px 0px;
+    }
+    .modelPopup {
+        position: absolute;
+        padding: 10px;
+        width: 95% !important;
+        background-color: #fff;
+        border: 2px solid #fff;
+    }
+    .listview-btn
+    {
+        position: absolute !important;
+        right: -6px !important;
+        left: unset !important;
+        top: 10px !important;
+    }
+    .gridview-btn
+    {
+        margin-left: 10px;
+    }
+}

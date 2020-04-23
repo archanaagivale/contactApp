@@ -20,17 +20,7 @@ export default class ContactGrid extends Component {
 
         </div>
     );
-    modelPopup = ({
-        position: "absolute",
-        padding: "10px",
-        width: 500,
-        maxWidth: 500,
-        backgroundColor: "#fff",
-        border: '2px solid #fff',
-        top: `50%`,
-        left: `50%`,
-        transform: `translate(-50%, -50%)`
-    })
+   
     constructor(props) {
         super(props)
         this.state = {
@@ -123,7 +113,7 @@ export default class ContactGrid extends Component {
                     aria-labelledby="simple-modal-title"
                     aria-describedby="simple-modal-description"
                 >
-                    <Contact style={this.modelPopup} contact={this.state.contact} saveContact={this.saveContact} />
+                    <Contact contact={this.state.contact} saveContact={this.saveContact} />
                 </Modal>
                  {this.state.displayview==="list" ? ( 
                 <Grid container style={{ width: "90%", marginLeft: "5%" }} >
@@ -134,25 +124,25 @@ export default class ContactGrid extends Component {
                         <Button style={{ marginLeft: "40px" }} color="primary" onClick={this.addContact}><span class="material-icons">
                             add
 </span> Contact</Button>
-<Button style={{ marginLeft: "40px" }} color="primary" onClick={this.changeView}>
+<Button className="gridview-btn" color="primary" onClick={this.changeView}>
                        
                        <span class="material-icons">view_module</span>
                         </Button>
                     </Grid>
                    
                   { this.state.data.map((item, index) => (
-                        <Box style={{ position:"relative", borderRadius: "4px", padding: "10px", width: "260px", minHeigth: "150px", maxHeigth: "150px", marginTop: "15px", marginBottom: "0px", marginRight: "15px", boxShadow: "rgba(0, 0, 0, 0.1) 2px 4px 18px 0px" }} key={index} width={210} marginRight={0.5} my={5} >
+                        <Box className="contactBox" key={index} width={210} marginRight={0.5} my={5} >
                             <Box  >
-                                <div style={{ margin: "5px", justifyContent: "center", display: "flex" }}>
+                                <div class="c-avtar">
                                     <Avatar>{item.firstname.charAt(0)}</Avatar>
                                     </div>
-                                <Typography gutterBottom variant="body2" style={{ textAlign: "center" }}>
+                                <Typography title={item.firstname}  gutterBottom variant="body2" className="contact-info">
                                     {item.firstname}  {item.lastname}
                                 </Typography>
-                                <Typography variant="body2" color="textSecondary" style={{ textAlign: "center" }}>
+                                <Typography title={item.email} variant="body2" color="textSecondary" className="contact-info">
                                     {item.email}
                                 </Typography>
-                                <Typography variant="body2" color="textSecondary" style={{ textAlign: "center" }}>
+                                <Typography title={item.phone} variant="body2" color="textSecondary" className="contact-info">
                                     {item.phone}
                                 </Typography>
                                 <Typography id={item.id} variant="body2" color="textSecondary" style={{ textAlign: "center" }}>
@@ -163,7 +153,7 @@ export default class ContactGrid extends Component {
                                         delete
                             </span>
                                 </Typography>
-                            <Typography id={item.id} style={{textAlign: "center" ,position:"absolute",top:"10px", right:"10px"}}  id={item.id} variant="body2" color="textSecondary">
+                            <Typography id={item.id} title={item.status} className="box-switch"  id={item.id} variant="body2" color="textSecondary">
                                 <Switch
                                     id={item.id}
                                     checked={item.status=="active" ? true :false}
@@ -178,12 +168,7 @@ export default class ContactGrid extends Component {
                 
                 </Grid>
                 ) :( <>
-                <Button style={{
-                    position: "absolute",
-                    left: "200px",
-                    zIndex: "9",
-                    top: "20px"
-                }}  color="primary" onClick={this.changeView}>
+                <Button className="listview-btn" color="primary" onClick={this.changeView}>
                        
                 <span onClick={this.changeView} class="material-icons">
                 view_list
