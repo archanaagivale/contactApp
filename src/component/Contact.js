@@ -49,7 +49,7 @@ export default class Contact extends Component{
         <Grid item xs={12}>
       <TextField name="phone" required value={this.state.phone} onChange={this.handleChange} fullWidth label="Phone" />
         </Grid>
-        <Grid item xs={12}>
+        <Grid item xs={12} >
         <FormControlLabel
         control={
           <Switch
@@ -62,7 +62,7 @@ export default class Contact extends Component{
         label="Status"
       />
        </Grid>
-        <Grid item xs={12}>
+        <Grid item xs={12} style={{textAlign:"center"}} >
         <Button variant="contained" onClick={this.props.saveContact.bind(this, this.state,this.state.action)} color="primary">
         Save
         </Button> </Grid>
