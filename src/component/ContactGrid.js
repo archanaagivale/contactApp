@@ -8,6 +8,8 @@ import Box from '@material-ui/core/Box';
 import Typography from '@material-ui/core/Typography';
 import Avatar from '@material-ui/core/Avatar';
 import Button from "@material-ui/core/Button";
+import Switch from '@material-ui/core/Switch';
+
 export default class ContactGrid extends Component {
     body = (
         <div>
@@ -39,14 +41,17 @@ export default class ContactGrid extends Component {
                 { title: 'First Name', field: 'firstname' },
                 { title: 'Last Name', field: 'lastname' },
                 { title: 'Email', field: 'email' },
+                {title: 'Phone',field: 'phone'},
                 {
-                    title: 'Phone',
-                    field: 'phone'
-                },
+                    title: 'Status',
+                    field: 'status',
+                    lookup: { "active":'active', "inactive":'inactive' },
+                  },
+
             ],
             data: [
-                { id: '1', firstname: 'Archana', lastname: 'Harad', email: "archanaagivale30@gmail.com", phone: "999999999" },
-                { id: '2', firstname: 'Aarvi', lastname: 'Agivale', email: "archana@gmail.com", phone: "999999999" }
+                { id: '1', firstname: 'Archana', lastname: 'Harad',status:"active", email: "archanaagivale30@gmail.com", phone: "999999999" },
+                { id: '2', firstname: 'Aarvi', lastname: 'Agivale',status:"inactive", email: "archana@gmail.com", phone: "999999999" }
             ]
         }
     }
@@ -92,6 +97,16 @@ export default class ContactGrid extends Component {
         this.setState({ contact: obj[0] });
         this.handleOpen();
     }
+    changeStatus = (event) => {
+        debugger;
+        const data = [...this.state.data];
+            let oldData = _.filter(this.state.data, { id: event.target.id });
+            let newData=oldData[0];
+            newData.status=event.target.checked ? "active" :"inactive"
+            data[data.indexOf(oldData[0])] = newData;
+    
+        this.setState({ data });
+    }
     addContact = (event) => {
         this.setState({ contact: {} });
         this.handleOpen();
@@ -126,7 +141,7 @@ export default class ContactGrid extends Component {
                     </Grid>
                    
                   { this.state.data.map((item, index) => (
-                        <Box style={{ borderRadius: "4px", padding: "10px", width: "260px", minHeigth: "150px", maxHeigth: "150px", marginTop: "15px", marginBottom: "0px", marginRight: "15px", boxShadow: "rgba(0, 0, 0, 0.1) 2px 4px 18px 0px" }} key={index} width={210} marginRight={0.5} my={5} >
+                        <Box style={{ position:"relative", borderRadius: "4px", padding: "10px", width: "260px", minHeigth: "150px", maxHeigth: "150px", marginTop: "15px", marginBottom: "0px", marginRight: "15px", boxShadow: "rgba(0, 0, 0, 0.1) 2px 4px 18px 0px" }} key={index} width={210} marginRight={0.5} my={5} >
                             <Box  >
                                 <div style={{ margin: "5px", justifyContent: "center", display: "flex" }}>
                                     <Avatar>{item.firstname.charAt(0)}</Avatar>
@@ -147,6 +162,15 @@ export default class ContactGrid extends Component {
                                     <span class="material-icons" style={{ cursor: "pointer" }} onClick={this.deleteContact}>
                                         delete
                             </span>
+                                </Typography>
+                            <Typography id={item.id} style={{textAlign: "center" ,position:"absolute",top:"10px", right:"10px"}}  id={item.id} variant="body2" color="textSecondary">
+                                <Switch
+                                    id={item.id}
+                                    checked={item.status=="active" ? true :false}
+                                    onChange={this.changeStatus}
+                                    name="status"
+                                    color="primary"
+                                />
                                 </Typography>
                             </Box>
                         </Box>

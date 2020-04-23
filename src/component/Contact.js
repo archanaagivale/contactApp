@@ -30,7 +30,7 @@ export default class Contact extends Component{
         this.setState({[event.target.name]:event.target.value});
     }
     handleSwitchChange = (event) => {
-        this.setState({ [event.target.name]: event.target.checked });
+        this.setState({ [event.target.name]: event.target.checked ? "active" :"inactive"});
       };
     render(){
     return (<>
