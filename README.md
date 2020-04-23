@@ -18,6 +18,8 @@ A typical top-level directory layout
 ├── index.js
 └── index.css
 
+Before run Please install package
+### `npm install` 
 *******In the project directory, you can run:
 
 ### `npm start`
