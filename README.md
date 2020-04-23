@@ -25,6 +25,7 @@ Before run Please install package
 ### `npm start`
 
 *****Description****
+Used React framework for design Application.
 I used material Ui for design UI .Contact List show in two view 
 1)Table/Grid view
 2)List view
